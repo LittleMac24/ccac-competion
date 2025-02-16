@@ -1,0 +1,79 @@
+# import relevant packages and load data
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+bracket_training = pd.read_csv('bracket_training.csv')
+
+
+# get summary statistics on all numerical data
+bracket_training.describe()
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+# import relevant packages and load data
+
+bracket_training = pd.read_csv('bracket_training.csv')
+# get summary statistics on all numerical data
+bracket_training.describe()
+
+# Select the specified columns
+selected_columns = ['RegionWinner_East', 'RegionWinner_West', 'RegionWinner_South', 'RegionWinner_Midwest', 'SemifinalWinner_East_West', 'SemifinalWinner_South_Midwest','NationalChampion']
+correlation_data = bracket_training[selected_columns]
+
+# Calculate the correlation matrix
+correlation_matrix = correlation_data.corr()
+
+# Display the correlation matrix
+print(correlation_matrix)
+
+# Optionally, visualize the correlation matrix using a heatmap
+plt.figure(figsize=(10, 8))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f")
+plt.title('Correlation Matrix of Selected Variables')
+plt.show()
+
+import pandas as pd
+X = bracket_training[['RegionWinner_East', 'RegionWinner_West', 'RegionWinner_South', 'RegionWinner_Midwest', 'SemifinalWinner_East_West', 'SemifinalWinner_South_Midwest']]
+X = sm.add_constant(X)
+# Assuming 'NationalChampion' column needs to be converted to 0/1:
+# Create a new column 'NationalChampion_Binary' where 1 represents the champion and 0 otherwise.
+# Replace 'ChampionTeamID' with the actual column name representing the champion team's ID.
+bracket_training['NationalChampion_Binary'] = (bracket_training['NationalChampion'] == bracket_training['NationalChampion']).astype(int)
+# If there is a separate column for ChampionTeamID, replace 'NationalChampion' above with that column name
+y = bracket_training['NationalChampion_Binary']  # Use the binary column as the dependent variable
+model = sm.Logit(y, X).fit()
+print(model.summary())
+
+
+
+# prompt: lot ReigonalWinner_East  in a hisrogram
+
+import matplotlib.pyplot as plt
+
+# Assuming 'bracket_training' DataFrame is already loaded as in your previous code
+
+plt.figure(figsize=(8, 6))
+plt.hist(bracket_training['RegionWinner_East'], bins=20, edgecolor='black')  # Adjust bins as needed
+plt.xlabel('RegionWinner_East')
+plt.ylabel('Frequency')
+plt.title('Histogram of RegionWinner_East')
+plt.grid(True)
+plt.show()
+
+# prompt: Plot NationalChampion on a histogram
+
+import matplotlib.pyplot as plt
+
+# Assuming 'bracket_training' DataFrame is already loaded as in your previous code
+
+plt.figure(figsize=(8, 6))
+plt.hist(bracket_training['NationalChampion'], bins=20, edgecolor='black')  # Adjust bins as needed
+plt.xlabel('NationalChampion')
+plt.ylabel('Frequency')
+plt.title('Histogram of NationalChampion')
+plt.grid(True)
+plt.show()
