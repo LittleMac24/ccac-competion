@@ -1,5 +1,0 @@
-To-Do List
-
-1: Look into potential uses for lat/long data
-2:Baseline Model --> Predicting Fan will choose team with higher winning percentage or will choose team that is in their same region
-3:Multi-Stage Logistic Regression
